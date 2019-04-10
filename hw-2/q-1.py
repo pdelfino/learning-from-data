@@ -1,4 +1,5 @@
 import random
+import operator
 
 moeda = ["cara","coroa"]
 
@@ -15,80 +16,102 @@ def flip_10_times(coin):
 
     return resultados
 
-print (flip_10_times(moeda))
+#print (flip_10_times(moeda))
 
 t_fix_lanc_10_vzs_mesma_moeda = ['cara', 'cara', 'cara', 'cara', 'coroa',
                                  'coroa', 'cara', 'coroa', 'coroa', 'cara']
 
-print(t_fix_lanc_10_vzs_mesma_moeda)
+#print(t_fix_lanc_10_vzs_mesma_moeda)
 
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-
-def count_caras(resul_dez_lançamentos):
-
+def count_caras(listao_com_10_lancamentos):
+    
     count = 0
 
-    for i in resul_dez_lançamentos:
+    for i in listao_com_10_lancamentos:
+        for j in i:
+            if j=="cara":
+                count+=1
+    return count
+
+listao_10_lancamentos = [
+        ['coroa', 'coroa', 'coroa', 'coroa', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa'],
+        ['cara', 'cara', 'cara', 'coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'cara'],
+        ['cara', 'coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'cara', 'coroa', 'coroa'],
+        ['coroa', 'coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'coroa', 'cara', 'coroa'],
+        ['coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'cara', 'coroa', 'coroa', 'coroa'],
+        ['coroa', 'cara', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'coroa'],
+        ['coroa', 'coroa', 'coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'coroa', 'coroa'],
+        ['coroa', 'cara', 'coroa', 'coroa', 'cara', 'coroa', 'coroa', 'coroa', 'coroa', 'coroa'],
+        ['coroa', 'coroa', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'coroa', 'coroa', 'cara'],
+        ['cara', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'coroa', 'cara']]
+
+#print (count_caras(listao_10_lancamentos))
+
+def sacola_dez_moedas(coin):
+
+    dict_resultados = {}
     
-        if i=="cara":
-        
-            count+=1
-
-    total_count = count
-    
-    return total_count
-
-#print (count_caras(t_fix_lanc_10_vzs_mesma_moeda))
-
-
-#função que joga 1000 moedas na função acima
-
-def simulation_1000_coins(coin):
-
-    matriz_resultados = []
-
     for i in range(1,1001):
+        count_caras_iter = 0
+        lista_iter_10_lancamentos = []
         
-        dez_vezes_a_moeda = flip_10_times(coin)
-        matriz_resultados.append([i,dez_vezes_a_moeda])
+        for j in range(1,11):
+            
+            lista_iter_10_lancamentos.append(flip_10_times(coin))
 
-    return matriz_resultados
+        count_caras_iter = count_caras(lista_iter_10_lancamentos)
+        dict_resultados[str(i)]= (lista_iter_10_lancamentos, count_caras_iter)
+#    print (dict_resultados)
+    return dict_resultados
 
-print (simulation_1000_coins(moeda))
+sacolao_fix = {'1': ([['cara', 'cara', 'cara', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'cara'], 
+               ['coroa', 'coroa', 'cara', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'coroa'], 
+               ['cara', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'coroa'],
+               ['coroa', 'cara', 'cara', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa'], 
+               ['coroa', 'coroa', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'cara'],
+               ['cara', 'coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'cara', 'cara', 'coroa'], 
+               ['cara', 'coroa', 'coroa', 'cara', 'coroa', 'coroa', 'coroa', 'cara', 'cara', 'cara'],
+               ['coroa', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'cara'],
+               ['coroa', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'cara', 'coroa', 'coroa', 'cara'],
+               ['coroa', 'cara', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'coroa']],
+               53), 
+               '2': ([['coroa', 'cara', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'cara'],
+                ['cara', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'coroa', 'coroa'],
+                ['coroa', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'cara', 'cara'],
+                ['coroa', 'coroa', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'cara', 'coroa', 'coroa'],
+                ['cara', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'coroa'],
+                ['cara', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'cara'],
+                ['coroa', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'cara'],
+                ['cara', 'cara', 'coroa', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'cara', 'coroa'],
+                ['coroa', 'coroa', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'cara', 'cara', 'coroa'],
+                ['coroa', 'cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'cara']],
+                48), 
+               '3': ([['coroa', 'cara', 'cara', 'cara', 'cara', 'cara', 'coroa', 'coroa', 'cara', 'coroa'],
+                ['cara', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'coroa', 'coroa', 'cara', 'cara'], 
+                ['coroa', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'cara'],
+                ['coroa', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'coroa', 'cara'],
+                ['cara', 'coroa', 'coroa', 'coroa', 'coroa', 'cara', 'cara', 'coroa', 'cara', 'coroa'], 
+                ['coroa', 'coroa', 'cara', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara'],
+                ['cara', 'coroa', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'cara'],
+                ['cara', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'cara', 'cara', 'coroa', 'coroa'],
+                ['cara', 'cara', 'coroa', 'coroa', 'coroa', 'cara', 'coroa', 'coroa', 'coroa', 'cara'], 
+                ['cara', 'coroa', 'coroa', 'cara', 'coroa', 'cara', 'coroa', 'coroa', 'cara', 'coroa']],
+                46)}
 
-
-def c_first(matriz):
-
-    return matriz[0]
-
-#print (c_first(simulation_1000_coins(moeda)))
-
-def c_rand(matriz):
-
-    return random.choice(matriz)
-
-#print (c_rand(simulation_1000_coins(moeda)))
+def c_min(sacolao):
     
-
-def freq_car(resultado_10_lançamentos):
+    lista_valores_minimos = []
     
-    count_coroas = 0
+    for i,j in sacolao.items():
+        lista_valores_minimos.append(j[1])
 
-    for i in resultado_10_lançamentos:
-        
-        if i=="cara":
-        
-            count_caras=0
-'''
+    return min(lista_valores_minimos)
+
+print (c_min(sacola_dez_moedas(moeda)))
+
+simulation = []
+
+for i in range(1,1001):
+    simulation.append(c_min(sacola_dez_moedas(moeda)))
+
+print (sum(simulation)/len(simulation))
