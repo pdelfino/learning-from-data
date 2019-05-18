@@ -1,8 +1,14 @@
 import matplotlib.pyplot as plt
-import warnings 
 from matplotlib import style
 from collections import Counter
 import numpy as np
+
+''' 
+    Material de consulta
+    Aulas 13 a 19 da playlist: 
+    https://www.youtube.com/watch?v=44jq6ano5n0&list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v&index=13
+    Livro: Learning From Data (LFD)    
+'''
 
 style.use('fivethirtyeight')
 dataset = {'k': [[1,2],[2,3],[3,1]], 'r': [[6,5],[7,7],[8,6]]}
@@ -11,7 +17,7 @@ new_features = [5,7]
 def k_nearest_neighbors(data, predict, k=3):
 
     if len(data) >= k:
-        warnings.warn('K is set to value less than total voting groups!')
+        return ('K is set to value less than total voting groups!')
 
     distances = []
     for group in data:
