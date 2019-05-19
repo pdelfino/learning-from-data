@@ -2,6 +2,14 @@ import numpy as np
 from sklearn.metrics.pairwise import euclidean_distances
 import matplotlib.pyplot as plt
 
+
+'''
+material de consulta
+Livro
+Aulas no Youtube na Caltech do Abu-mostafa
+Wikipedia
+Post esclarecedor: http://www.jessebett.com/Radial-Basis-Function-USRA/
+'''
 n = 5000
 
 # 8 mil pontos de -10 a 10 no eixo X
