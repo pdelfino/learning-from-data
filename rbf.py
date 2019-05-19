@@ -1,51 +1,39 @@
 import numpy as np
+from sklearn.metrics.pairwise import euclidean_distances
+import matplotlib.pyplot as plt
 
-# hidden shape: numero de centros
-class RBFN(object):
+n = 5000
 
-    def __init__(self, hidden_shape, sigma=1.0):
+# 8 mil pontos de -10 a 10 no eixo X
+X = np.linspace(-10, 10, num=n)
 
-        self.hidden_shape = hidden_shape
-        self.sigma = sigma
-        self.centers = None
-        self.weights = None
+#começo com uma lista, mas para usar numpy tem que virar array
+lista_X = []
 
-    def _kernel_function(self, center, data_point):
-        return np.exp(-self.sigma*np.linalg.norm(center-data_point)**2)
+# fazer uma array of arrays
+for i in X:
+    lista_X.append([i])
+array_lista_X=np.array([np.array(xi) for xi in lista_X])
 
-# calcular a interpolação
-# X são os dados de treinamento
-# retorno a matrix de interpolação
-    def _calculate_interpolation_matrix(self, X):
+X = array_lista_X
 
-        G = np.zeros((len(X), self.hidden_shape))
-        for data_point_arg, data_point in enumerate(X):
-            for center_arg, center in enumerate(self.centers):
-                G[data_point_arg, center_arg] = self._kernel_function(
-                        center, data_point)
-        return G
+Y = (X)**2
 
-    def _select_centers(self, X):
-        random_args = np.random.choice(len(X), self.hidden_shape)
-        centers = X[random_args]
-        return centers
+centroides_num = 10 # numero de centros da RBF
 
-# X é a amostra de treinamento
-# Y é o alvo
-    def fit(self, X, Y):
+# acho o k via random.choice, e não validação cruzada
+index=np.random.choice(a=n,size=centroides_num) 
 
-        self.centers = self._select_centers(X)
-        G = self._calculate_interpolation_matrix(X)
-        self.weights = np.dot(np.linalg.pinv(G), Y)
+subsample=X[index,:] 
 
-    def predict(self, X):
-        """
-        # Arguments
-            X: test data
-        # Input shape
-            (num_test_samples, input_shape)
-        """
-        G = self._calculate_interpolation_matrix(X)
-        predictions = np.dot(G, self.weights)
-        return predictions
+gamma = 0.5
 
+kernel = np.exp(-gamma*euclidean_distances(X=X, Y=subsample,squared=True))
+para = np.linalg.lstsq(kernel, Y)[0]
+
+predict_Y = np.dot(kernel, para)
+
+plt.plot(X, Y, 'r', label='Dados originais')
+plt.plot(X, predict_Y, 'b', label='Após o data fit')
+plt.legend()
+plt.show()
