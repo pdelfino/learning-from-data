@@ -2,6 +2,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 
+# definindo os pesos arbitrariamente
 w_1 = np.array([1,0,-1]) 
 w_2 = np.array([1,0,1])
 w_3 = np.array([1,-1,0])
