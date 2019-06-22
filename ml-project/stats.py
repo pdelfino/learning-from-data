@@ -7,6 +7,7 @@ df = pd.read_csv('breast-cancer-wisconsin.data.txt')
 for i in df:
     print (i)
     print (df[str(i)].describe())
+    #print (df[str(i)].kurtosis())
     print (" ")
 
 """ 
