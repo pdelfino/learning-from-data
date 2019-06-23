@@ -425,6 +425,16 @@ De acordo com ela, existem técnicas para plotar a fronteira de decisão em caso
 
 
 
+## Trabalho Futuro possível
+
+
+
+Se eu tivesse mais tempo, gostaria de comparar esse modelo preditivo com um modelo ainda mais simples, que usasse a correlação entre o tamanho do tumor e a sua classificação como maligno/benigno.
+
+O nível de acurácia da predição com knn sendo k=26 foi alto, aproximadamente, 95%. Minha hipótese  é que um modelo que explorasse a correlação citada acima teria uma predição com acurácia inferior, mas, ainda sim, alta, como na faixa de 80-90%.
+
+Infelizmente, em virtude da restrição de tempo, usarei isso como trabalho futuro.
+
 
 
 
