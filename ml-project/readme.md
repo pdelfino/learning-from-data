@@ -317,22 +317,22 @@ O método usado será o KNN. Desse modo, existe um único hiperparâmetro a ser 
 
 Seguindo as recomendações de boas práticas que percebi no conteúdo prático citado acima, a recomendação é de usar a raiz quadrada do tamanho da amostra, isto é: 
 
-$ \sqrt[n]{k} $
+$$ k = \sqrt{n} $$
 
-No caso,  a amostra é n = 699. Assim, a raiz aproximada é k = 26.
+No caso,  a amostra é `n = 699`. Assim, a raiz aproximada é `k = 26`.
 
 
 
 #### 2.3 Utilize k-fold cross validation para selecionar 15 valores do hiperparâmetro
 
-Usando o script abaixo, selecionei 15 valores de k entre 1 e 399.
+Usando o script abaixo, selecionei `15` valores de `k` entre `1` e `489`.
 
-A amostra vai até 699. Entretanto, tive que limitar para um valor inferior, caso contrário, na etapa seguinte, quando eu fosse rodar a acurácia do modelo preditivo para cada um desses valores, eu poderia ter k maior do que o conjunto de dados de treinamento.
+A amostra vai até `699`. Entretanto, tive que limitar para um valor inferior, caso contrário, na etapa seguinte, quando eu fosse rodar a acurácia do modelo preditivo para cada um desses valores, eu poderia ter `k` maior do que o `n`. Portanto, limitei os valores possíveis de `k` entre `1` e `489`, sendo que `489`  é `70%` de `699`, arredondando para baixo.
 
 ```python
 import random
 
-lista_valores_hiperparametros = random.sample(range(1,399),15)
+lista_valores_hiperparametros = random.sample(range(1,489),15)
 
 print (lista_valores_hiperparametros)
 lista_valores_hiperparametros.append(26)
@@ -423,9 +423,17 @@ De acordo com ela, existem técnicas para plotar a fronteira de decisão em caso
 
 # Parte 3: Conclusão
 
+## Geral
 
 
-## Trabalho Futuro possível
+
+O resultado foi satisfatório. O modelo preditivo se comportou bem e teve alto nível de acurácia. Com o valor de hiperparâmetro  `k=26` , que segue a recomendação da área, o nível de acurácia gira em torno de `95%`.
+
+Como visto acima, o valor do hiperparâmetro é peça chave para o nível de acurácia, já que valores de `k` muito grandes reduzem a acurácia do modelo.
+
+
+
+## Especulações e trabalhos futuros possíveis
 
 
 
@@ -433,9 +441,11 @@ Se eu tivesse mais tempo, gostaria de comparar esse modelo preditivo com um mode
 
 O nível de acurácia da predição com knn sendo k=26 foi alto, aproximadamente, 95%. Minha hipótese  é que um modelo que explorasse a correlação citada acima teria uma predição com acurácia inferior, mas, ainda sim, alta, como na faixa de 80-90%.
 
-Infelizmente, em virtude da restrição de tempo, usarei isso como trabalho futuro.
+O professor Eduardo Mendes disse em sala que a avaliação de modelos preditivos deve ter sempre uma comparação, uma espécie de `lower bound`, em que o modelador compara o desempenho de um modelo simples com um modelo mais sofisticado. 
 
+Além disso, como um modelo mais sofisticado que KNN, seria possível resolver este problema de classificação com um modelo preditivo de classificação via *Support Vector Machine.*
 
+Acredito que esse seria um trabalho futuro legal, comparar o KNN com um modelo mais simples, baseado na correlação com um variável, e com um modelo mais sofisticado como SVM. Infelizmente, em virtude da restrição de tempo, deixarei a ideia dessa comparação como trabalho futuro.
 
 
 
