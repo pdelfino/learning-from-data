@@ -18,7 +18,7 @@ y = np.array(df['class'])
 # separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
 
-clf = neighbors.KNeighborsClassifier()
+clf = neighbors.KNeighborsClassifier(26)
 
 # inserir no objeto o treinamento
 clf.fit(X_train, y_train)

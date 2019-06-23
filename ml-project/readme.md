@@ -230,7 +230,7 @@ plt.show()
 
 
 
-O código retorna a seguinte image:
+O código retorna a seguinte imagem:
 
 ![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/visu-central-info.png)
 
@@ -244,7 +244,7 @@ Duas visualizações mais interessantes e menos óbvias  serão mostradas abaixo
 
 
 
-Meu pai é médico, tendo feito residência em cirurgia geral. Com o feriado de Corpus Christi, vim para BH e, um dia, comentei do trabalho que estava fazendo, que envolvia tumores de mama.  Ao saber do tema do trabalho, meu pai me disse que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
+Meu pai é médico, tendo feito residência em cirurgia geral. Com o feriado de Corpus Christi, vim para BH, e, um dia, comentei do trabalho que estava fazendo, que envolvia tumores de mama.  Ao saber da proposta de "advinhar o futuro" (modelo de predição) do trabalho, meu pai me disse que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
 
 
 
@@ -323,9 +323,91 @@ No caso,  a amostra é n = 699. Assim, a raiz aproximada é k = 26.
 
 
 
-#### 2.3 Utilize k-fold cross validation
+#### 2.3 Utilize k-fold cross validation para selecionar 15 valores do hiperparâmetro
+
+Usando o script abaixo, selecionei 15 valores de k entre 1 e 399.
+
+A amostra vai até 699. Entretanto, tive que limitar para um valor inferior, caso contrário, na etapa seguinte, quando eu fosse rodar a acurácia do modelo preditivo para cada um desses valores, eu poderia ter k maior do que o conjunto de dados de treinamento.
+
+```python
+import random
+
+lista_valores_hiperparametros = random.sample(range(1,399),15)
+
+print (lista_valores_hiperparametros)
+lista_valores_hiperparametros.append(26)
+
+ista_valores_hiperparametros.sort()
+print (lista_valores_hiperparametros)
+
+```
 
 #### 2.4 Construa o gráfico com erro de validação cruzada
+
+
+
+Ao invés de usar o erro, eu usei o ''complementar'', o nível de acurácia. 
+
+Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado, ficando maior, menor é a acurácia do modelo preditivo, isto é, maior é o erro.
+
+Portanto, a intuição do uso da raiz quadrada na regra de bolso é: ela serve para "achatar" o valor do hiperparâmetro em função do tamanho da amostra.
+
+A imagem abaixo ilustra:
+
+![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/grafico-k-variando.png)
+
+
+
+O código usado é:
+
+```python
+import numpy as np
+from sklearn import preprocessing, cross_validation, neighbors
+import pandas as pd
+import random
+import matplotlib.pyplot as plt
+
+# no arquivo de dados são 11 variáveis, 10 independetes e 1 dependente
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+
+df.replace('?',-99999, inplace=True)
+
+df.drop(['id'], 1, inplace=True)
+
+# as features são tudo menos a coluna de classe
+X = np.array(df.drop(['class'], 1))
+
+y = np.array(df['class'])
+
+# separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
+
+lista_valores_hiperparametros = random.sample(range(1,489),15)
+print (lista_valores_hiperparametros)
+lista_valores_hiperparametros.append(26)
+
+lista_valores_hiperparametros.sort()
+print (lista_valores_hiperparametros)
+
+accuracy_list = []
+for i in lista_valores_hiperparametros:
+    X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
+    clf = neighbors.KNeighborsClassifier(i)
+    clf.fit(X_train, y_train)
+    accuracy = clf.score(X_test, y_test)
+    accuracy_list.append(accuracy)
+
+print (accuracy_list)
+
+plt.plot(lista_valores_hiperparametros, accuracy_list , 'ro')
+plt.axis([1,489,0,1])
+plt.xlabel('Valores para o hiperparâmetro K')
+plt.ylabel('Nível de Acurácia')
+plt.title('Gráfico com o erro para cada um dos parâmetros')
+plt.show()
+```
+
+
 
 #### 2.5 Plote a fronteira de decisão para o hiperparâmetro escolhido
 
