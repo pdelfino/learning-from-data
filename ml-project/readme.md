@@ -232,11 +232,7 @@ plt.show()
 
 O código retorna a seguinte image:
 
-![alt text](/home/pedro/lfd/ml-project/visu-central-info.png)
-
-
-
-
+![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/visu-central-info.png)
 
 
 
@@ -254,9 +250,11 @@ Meu pai é médico, tendo feito residência em cirurgia geral. Com o feriado de 
 
 Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula . De fato, a hipótese/intuição do meu pai, que tem alguma familiaridade com o domínio do trabalho, estava certa. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
 
-![alt-text](/home/pedro/lfd/ml-project/histogram-cell-size.png)
+![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/histogram-cell-size.png)
 
-![size-maligno-benigno](/home/pedro/lfd/ml-project/size-maligno-benigno.png)
+
+
+![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/size-maligno-benigno.png)
 
 
 
