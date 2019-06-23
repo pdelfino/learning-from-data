@@ -28,8 +28,9 @@ clf.fit(X_train, y_train)
 
 # fazer o teste para saber a acurácia
 accuracy = clf.score(X_test, y_test)
-print("erro no teste: ", 1-accuracy)
 
+print("acurácia: ", accuracy)
+print("erro no teste: ", 1-accuracy)
 print ("erro no treinamento: ", 1-clf.score(X_train,y_train))
 
 

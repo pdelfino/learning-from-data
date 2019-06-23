@@ -14,7 +14,7 @@ Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a
 
 - Repositório do professor Renato Souza da EMAp, em especial, o *case* da IRIS [link](https://github.com/rsouza/FGV_Intro_DS)
 - Vídeo IRIS [link](https://www.youtube.com/watch?v=hd1W4CyPX58)
-- Playlist do Youtuber sentdex [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
+- Playlist do Youtuber sentdex com vários exemplos, modelo preditivo de ações e, inclusive, o de câncer de mama que será discutido aqui [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
 - Stackoverflow: perguntas diversas feitas por outros usuários e uma pergunta que eu mesmo fiz [link](https://stackoverflow.com/questions/56718635/is-the-interpretation-of-the-data-visualization-bellow-which-uses-python-librar)
 
 
@@ -418,6 +418,57 @@ De acordo com ela, existem técnicas para plotar a fronteira de decisão em caso
 
 
 #### 2.6 Apresente os erros dentro da amostra, de validação cruzada e de teste
+
+Para `k=26`
+
+Acurácia: `0.9571428571428572`
+
+Erro de teste: `0.042857142857142816`
+
+Erro de treinamento: `0.03271983640081799`
+
+Não consegui fazer erro de validação cruzada (?)
+
+
+
+Código com comentário linha por linha:
+
+```python
+import numpy as np
+from sklearn import preprocessing, cross_validation, neighbors
+import pandas as pd
+
+# no arquivo de dados são 11 variáveis, 10 independetes e 1 dependente
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+
+# para dados faltantes
+df.replace('?',-99999, inplace=True)
+
+# tira a coluna de id pq ela não é nem variável dependente e nem independente
+df.drop(['id'], 1, inplace=True)
+
+# as features são tudo menos a coluna de classe, a id já foi excluída
+X = np.array(df.drop(['class'], 1))
+
+# o Y na minha supervised learning é a class
+y = np.array(df['class'])
+
+# separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
+
+# defini o hiperparâmetro como k=26 já que n=699 como tamanho da amostra
+clf = neighbors.KNeighborsClassifier(26)
+
+# inserir no objeto o treinamento
+clf.fit(X_train, y_train)
+
+# fazer o teste para saber a acurácia
+accuracy = clf.score(X_test, y_test)
+
+print("acurácia: ", accuracy)
+print("erro no teste: ", 1-accuracy)
+print ("erro no treinamento: ", 1-clf.score(X_train,y_train))
+```
 
 
 

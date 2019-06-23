@@ -4,7 +4,6 @@ import pandas as pd
 import random
 import matplotlib.pyplot as plt
 
-# no arquivo de dados são 11 variáveis, 10 independetes e 1 dependente
 df = pd.read_csv('breast-cancer-wisconsin.data.txt')
 
 df.replace('?',-99999, inplace=True)
