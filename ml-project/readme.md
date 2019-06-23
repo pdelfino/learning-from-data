@@ -4,18 +4,18 @@
 
 
 
-O relatório do trabalho será feito neste arquivo Markdown e por meio de respostas às perguntas do [arquivo](https://www.dropbox.com/s/pnc02xjuotf7q0y/Trabalho.pdf?dl=0) com instruções.
+O relatório do trabalho será feito neste arquivo Markdown. Além disso, o documento está organizado como respostas às perguntas do [arquivo](https://www.dropbox.com/s/pnc02xjuotf7q0y/Trabalho.pdf?dl=0) com as instruções.
 
 
 
-#### Disclaimer
+#### *Antepasti*
 
-Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias como obtenção dos dados, limpeza, treinamento do modelo e teste. Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
+Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias como: obtenção dos dados, limpeza, treinamento do modelo e teste. Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
 
-- repositório do professor Renato Souza da EMAp, em especial, o *case* da ISIS [link]
-- vídeo ISIS [link]
-- playlist do sentdex [link]
-- stackoverflow: perguntas diversas feitas por outros usuários e uma pergunta que eu mesmo fiz [link]
+- Repositório do professor Renato Souza da EMAp, em especial, o *case* da IRIS [link](https://github.com/rsouza/FGV_Intro_DS)
+- Vídeo IRIS [link](https://www.youtube.com/watch?v=hd1W4CyPX58)
+- Playlist do Youtuber sentdex [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
+- Stackoverflow: perguntas diversas feitas por outros usuários e uma pergunta que eu mesmo fiz [link](https://stackoverflow.com/questions/56718635/is-the-interpretation-of-the-data-visualization-bellow-which-uses-python-librar)
 
 
 
@@ -27,9 +27,9 @@ Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a
 
 
 
-A base de dados vem de um repositório da **UC Irvine Machine Learning Repository** [link](https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/).
+A base de dados usada foi extraída do repositório da **UC Irvine** chamado **Machine Learning Repository** [link](https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/).
 
-Os dados descrevem atributos de células cancerígenas na região da mama, sendo o ponto principal a indicação de uma classificação entre tumores malignos e benignos.
+Os dados descrevem atributos de células cancerígenas na região da mama, sendo que o principal ponto é a indicação de uma classificação entre tumores malignos e benignos.
 
 A pergunta de pesquisa que se pretende responder é: *em qual nível de acurácia um modelo preditivo consegue classificar um tumor, na região da mama, como benigno ou maligo?*
 
@@ -199,7 +199,7 @@ Name: mitoses, dtype: float64
 
 
 
-- Como descrito na documentação a distribuição, na amostra, de tumores benignos e malignos é:
+- A documentação da base de dados está disponibillizada no arquivo`breast-cancer-wisconsin.names`. No documento, indica-se a seguinte distribuição de tumores benignos e malignos na amostra :
 
   ​	Benign: 458 (65.5%)
   ​	Malignant: 241 (34.5%)
@@ -240,19 +240,19 @@ O código retorna a seguinte image:
 
 
 
-A imagem acima não é muito interessante, mas expressa bem a proporção da questão crucial que está em jogo.
+Apesar de simples, a imagem acima ilustra a informação crucial dos dados.
 
 
 
-Mais interessante do que isso, são as duas vizualizações abaixo. A história por trás da visualização será apresentada a seguir é peculiar.
+Duas visualizações mais interessantes e menos óbvias  serão mostradas abaixo.  Entretando, cabe contar brevemente a história por trás delas.
 
 
 
-Meu pai é médico, com residência em cirurgia geral. Estou em BH e, um dia, comentei do trabalho que estava fazendo, que envolvia tumores de mama.  Ele me disse que achava que o tamanho do tumor seria já um bom indicativo para descobrir se é maligno ou benigno. 
+Meu pai é médico, tendo feito residência em cirurgia geral. Com o feriado de Corpus Christi, vim para BH e, um dia, comentei do trabalho que estava fazendo, que envolvia tumores de mama.  Ao saber do tema do trabalho, meu pai me disse que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
 
 
 
-Dito isso, fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 uma célular bem grande. De fato, a hipótese/intuição do meu pai, que tem alguma familiaridade com o domínio, estava certa rsrs. Como o histograma indica abaixo,  tumores malignos tendem a ser maiores que benignos:
+Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula . De fato, a hipótese/intuição do meu pai, que tem alguma familiaridade com o domínio do trabalho, estava certa. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
 
 ![](/home/pedro/lfd/ml-project/histogram-cell-size.png)
 
@@ -278,7 +278,7 @@ plt.show()
 
 #### 1.5 Proporção de treino e de teste
 
-Dividi os meus dados aleatoriamente na proporção de 70-30, sendo que 70% para treinamento e 30% para teste.
+Dividi os meus dados aleatoriamente na proporção de 70-30, sendo que 70% foram usados para treinamento e 30% para teste.
 
 
 
@@ -321,7 +321,7 @@ Seguindo as recomendações de boas práticas que percebi no conteúdo prático 
 
 $ \sqrt[n]{k} $
 
-No caso, como a amostra é n = 699. Temos a raiz aproximada de k = 26.
+No caso,  a amostra é n = 699. Assim, a raiz aproximada é k = 26.
 
 
 
@@ -331,9 +331,9 @@ No caso, como a amostra é n = 699. Temos a raiz aproximada de k = 26.
 
 #### 2.5 Plote a fronteira de decisão para o hiperparâmetro escolhido
 
-Não é possível tendo em  vista que são 10 variáveis em jogo. Conversei com a colega Vitória sobre isso.
+Não é simples plotar a fronteira de decisão tendo em  vista que são 10 variáveis em jogo. Nos exemplos vistos em sala, tínhamos duas variáveis e um plano de duas dimensões. Diante desse impasse, conversei com a colega Vitória sobre isso.
 
-De acordo com ela, existem técnicas para plotar a fronteira de decisão em casos que vão além do plano de duas dimensões, mas não foi explorar essas técnicas para esse trabalho.
+De acordo com ela, existem técnicas para plotar a fronteira de decisão em casos de dimensões superiores, mas, em virtude da restrição de tempo, não foi possível explorar essas técnicas para este trabalho.
 
 
 
