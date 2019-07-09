@@ -10,12 +10,12 @@ O relatório do trabalho será feito neste arquivo Markdown. Além disso, o docu
 
 #### *Antepasti*
 
-Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias e práticas como: obtenção dos dados, limpeza e sintaxe das bibliotecas envolvidas. Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
+Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias e práticas como: obtenção dos dados, limpeza e uso da sintaxe do Pandas (biblioteca de Python). Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
 
 - Repositório do professor Renato Souza da EMAp, em especial, o *case* da IRIS [link](https://github.com/rsouza/FGV_Intro_DS)
 - Vídeo IRIS [link](https://www.youtube.com/watch?v=hd1W4CyPX58)
 - *Playlist* do Youtuber sentdex com vários exemplos, modelo preditivo de ações e, inclusive, o de câncer de mama que será discutido aqui [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
-- Stackoverflow: perguntas diversas feitas por outros usuários e uma pergunta que eu mesmo fiz [link](https://stackoverflow.com/questions/56718635/is-the-interpretation-of-the-data-visualization-bellow-which-uses-python-librar)
+- Stackoverflow: perguntas diversas feitas por outros usuários e perguntas que eu mesmo fiz [link](https://stackoverflow.com/questions/56718635/is-the-interpretation-of-the-data-visualization-bellow-which-uses-python-librar)
 
 
 
@@ -41,7 +41,7 @@ Os principais aspectos da base são:
 
 
 
--  A amostra é formada por 699 elementos
+-  A amostra é formada por 699 elementos, em 241 casos o tumor era *benigno* e em 458 casos o tumor era *maligno*.
 
 - Ao todo são 11 colunas/atributos na base de dados, sendo que uma delas é apenas um identificador (ID) e a última delas apresenta a classificação como Benigno ou Maligno. Para tumores benignos, o número 2 é usado. Para tumores malignos, o número 4 é usado.
 
@@ -262,11 +262,11 @@ class
 
 Analisando a tabela acima, é possível perceber que nos valores máximos e mínimos os tumores malignos e benignos não são muito diferentes. No caso de mínimo, são praticamente idênticos, seja no tamanho uniforme da célular ou em sua forma, tanto tumores benignos como malignos recebem nota 1 na escala de 1 a 10 montada pelos pesquisadores.
 
-Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, a máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo de Bland Chromatin em tumores malignos recebe nota 10. Apesar desta diferença, os valores máximos entre os dois tumores são homogêneos.
+Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, o máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo de *Bland Chromatin* em tumores malignos recebe nota 10. Apesar desta diferença, os valores máximos entre os dois tumores nas dez variáveis consideradas são, de certa forma, homogêneos.
 
 
 
-**A diferença chave entre os dois tipos de tumores na variáveis consideradas está nos valores que estão no quartil superior, isto é,  75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, em tumores benignos a nota atribuída para o quartil superior é de 1 em 10, no mesmo percentil, tumores malignos receberam nota 10 de 10. Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu.
+**A diferença chave entre os dois tipos de tumores, não no máximo ou mínimo, mas sim nos valores que estão no quartil superior, isto é,  75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, em tumores benignos a nota atribuída para o quartil superior é de 1 em 10, no mesmo percentil, tumores malignos receberam nota 10 de 10. Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu. Isso sugere que casos nessa faixa de percentil sejam mais fáceis de serem classificados  do que casos em que as métricas estão próximas do máximo definido.
 
 #### 1.4 Apresente outra duas análises ou visualizações interessantes
 
