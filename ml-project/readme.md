@@ -10,7 +10,7 @@ O relatório do trabalho será feito neste arquivo Markdown. Além disso, o docu
 
 #### *Antepasti*
 
-Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias como: obtenção dos dados, limpeza, treinamento do modelo e teste. Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
+Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a execução do trabalho, senti que estava um pouco despreparado para tarefas intermediárias e práticas como: obtenção dos dados, limpeza e sintaxe das bibliotecas envolvidas. Assim, busquei materiais de consulta **com abordagens práticas**, entre eles, destaco:
 
 - Repositório do professor Renato Souza da EMAp, em especial, o *case* da IRIS [link](https://github.com/rsouza/FGV_Intro_DS)
 - Vídeo IRIS [link](https://www.youtube.com/watch?v=hd1W4CyPX58)
@@ -93,7 +93,9 @@ for i in df:
 
 
 
-As estatísticas descritivas relevantes da base de dados são:
+Seria possível um `dt.describe()`, mas a leitura fica melhor no formato abaixo, com um `print` para cada variável.
+
+As estatísticas descritivas mais diretas da base de dados são:
 
 ```
 clump_thickness
@@ -194,6 +196,77 @@ Name: mitoses, dtype: float64
 ```
 
 
+
+Como todo o trabalho gira em torno da classificação de tumores como benignos ou malignos, cabe apresentar a diferença nessas estatísticas entre tumores malignos e benignos.
+
+
+
+```
+bland_chrom                                                
+            count      mean       std  min  25%  50%  75%   max   
+class                                                             
+2           458.0  2.100437  1.080339  1.0  1.0  2.0  3.0   7.0   
+4           241.0  5.979253  2.273852  1.0  4.0  7.0  7.0  10.0   
+
+
+clump_thickness                                                    
+                count      mean       std  min  25%  50%   75%   max  count   
+class                                                                         
+2               458.0  2.956332  1.674318  1.0  1.0  3.0   4.0   8.0  458.0   
+4               241.0  7.195021  2.428849  1.0  5.0  8.0  10.0  10.0  241.0   
+
+
+marg_adhesion                                               
+              max         count      mean       std  min  25%  50%  75%   max   
+class                                                                           
+2      13454352.0         458.0  1.364629  0.996830  1.0  1.0  1.0  1.0  10.0   
+4       1371026.0         241.0  5.547718  3.210465  1.0  3.0  5.0  8.0  10.0   
+
+
+mitoses                                                 
+        count      mean       std  min  25%  50%  75%   max         count   
+class                                                                       
+2       458.0  1.063319  0.501995  1.0  1.0  1.0  1.0   8.0         458.0   
+4       241.0  2.589212  2.557939  1.0  1.0  1.0  3.0  10.0         241.0   
+
+
+norm_nucleoli                                           
+           mean       std  min  25%  50%   75%   max                  count   
+class                                                                         
+2      1.290393  1.058856  1.0  1.0  1.0   1.0   9.0                  458.0   
+4      5.863071  3.350672  1.0  3.0  6.0  10.0  10.0                  241.0   
+
+
+single_epith_cell_size                                           
+           mean       std  min  25%  50%  75%   max          count      mean   
+class                                                                          
+2      2.120087  0.917130  1.0  2.0  2.0  2.0  10.0          458.0  1.443231   
+4      5.298755  2.451606  1.0  3.0  5.0  6.0  10.0          241.0  6.560166   
+
+
+unif_cel_shape                                                  
+            std  min  25%  50%  75%   max         count      mean       std   
+class                                                                         
+2      0.997836  1.0  1.0  1.0  1.0   8.0         458.0  1.325328  0.907694   
+4      2.562045  1.0  4.0  6.0  9.0  10.0         241.0  6.572614  2.719512   
+
+
+unif_cel_size                            
+       min  25%  50%   75%   max  
+class                             
+2      1.0  1.0  1.0   1.0   9.0  
+4      1.0  4.0  6.0  10.0  10.0  
+```
+
+ 
+
+Analisando a tabela acima, é possível perceber que nos valores máximos e mínimos os tumores malignos e benignos não são muito diferentes. No caso de mínimo, são praticamente idênticos, seja no tamanho uniforme da célular ou em sua forma, tanto tumores benignos como malignos recebem nota 1 na escala de 1 a 10 montada pelos pesquisadores.
+
+Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, a máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo de Bland Chromatin em tumores malignos recebe nota 10. Apesar desta diferença, os valores máximos entre os dois tumores são homogêneos.
+
+
+
+**A diferença chave entre os dois tipos de tumores na variáveis consideradas está nos valores que estão no quartil superior, isto é,  75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, em tumores benignos a nota atribuída para o quartil superior é de 1 em 10, no mesmo percentil, tumores malignos receberam nota 10 de 10. Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu.
 
 #### 1.4 Apresente outra duas análises ou visualizações interessantes
 
