@@ -398,6 +398,176 @@ No caso,  a amostra é `n = 699`. Assim, a raiz aproximada é `k = 26`.
 
 #### 2.3 Utilize k-fold cross validation para selecionar 15 valores do hiperparâmetro
 
+O objetivo do *cross validation* é escolher um `k` ótimo.  Assim, irei testar o modelo de predição para todos os valores de `k` entre `1` e `50`.
+
+O script usado foi:
+
+
+
+```python
+import numpy as np
+from sklearn import preprocessing, cross_validation, neighbors
+import pandas as pd
+
+# no arquivo de dados são 11 variáveis, 9 independetes, 1 dependente e 1 é só primary-key
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+
+# para dados faltantes
+df.replace('?',-99999, inplace=True)
+
+# tira a coluna de id pq ela não é nem variável dependente e nem independente
+df.drop(['id'], 1, inplace=True)
+
+# as features são tudo menos a coluna de classe, a id já foi excluída
+X = np.array(df.drop(['class'], 1))
+
+# o Y na minha supervised learning é a class
+y = np.array(df['class'])
+
+# separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
+
+k_values = list(range(1,51))
+
+
+for i in k_values:
+
+    # defini o hiperparâmetro como k=i, 26 está dentro do intervalo de iteração 
+    clf = neighbors.KNeighborsClassifier(i)
+
+    # inserir no objeto o treinamento
+    clf.fit(X_train, y_train)
+
+    # fazer o teste para saber a acurácia
+    accuracy = clf.score(X_test, y_test)
+    
+    print("acurácia para o hiperparâmatro k=", i, ": ", accuracy)
+    #print("erro no teste: ", 1-accuracy)
+```
+
+
+
+O output é:
+
+
+
+```
+acurácia para o hiperparâmatro k= 1 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 2 :  0.9428571428571428
+acurácia para o hiperparâmatro k= 3 :  0.9476190476190476
+acurácia para o hiperparâmatro k= 4 :  0.9476190476190476
+acurácia para o hiperparâmatro k= 5 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 6 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 7 :  0.9476190476190476
+acurácia para o hiperparâmatro k= 8 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 9 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 10 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 11 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 12 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 13 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 14 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 15 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 16 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 17 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 18 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 19 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 20 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 21 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 22 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 23 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 24 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 25 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 26 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 27 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 28 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 29 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 30 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 31 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 32 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 33 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 34 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 35 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 36 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 37 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 38 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 39 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 40 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 41 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 42 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 43 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 44 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 45 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 46 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 47 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 48 :  0.9523809523809523
+acurácia para o hiperparâmatro k= 49 :  0.9571428571428572
+acurácia para o hiperparâmatro k= 50 :  0.9523809523809523
+```
+
+
+
+Ordenando os valores de forma crescente, percebemos que `k=26` valor sugerido pela regra de bolso utilizada é um dos resultados que obteve **a maior acurácia no teste** - empatado com outros valores ,diga-se de passagem: 
+
+```
+k=	2	0.9428571428571428
+k=	3	0.9476190476190476
+k=	4	0.9476190476190476
+k=	7	0.9476190476190476
+k=	1	0.9523809523809523
+k=	5	0.9523809523809523
+k=	6	0.9523809523809523
+k=	8	0.9523809523809523
+k=	14	0.9523809523809523
+k=	15	0.9523809523809523
+k=	16	0.9523809523809523
+k=	17	0.9523809523809523
+k=	18	0.9523809523809523
+k=	19	0.9523809523809523
+k=	32	0.9523809523809523
+k=	33	0.9523809523809523
+k=	34	0.9523809523809523
+k=	35	0.9523809523809523
+k=	36	0.9523809523809523
+k=	37	0.9523809523809523
+k=	38	0.9523809523809523
+k=	39	0.9523809523809523
+k=	40	0.9523809523809523
+k=	41	0.9523809523809523
+k=	42	0.9523809523809523
+k=	43	0.9523809523809523
+k=	44	0.9523809523809523
+k=	45	0.9523809523809523
+k=	46	0.9523809523809523
+k=	47	0.9523809523809523
+k=	48	0.9523809523809523
+k=	50	0.9523809523809523
+k=	9	0.9571428571428572
+k=	10	0.9571428571428572
+k=	11	0.9571428571428572
+k=	12	0.9571428571428572
+k=	13	0.9571428571428572
+k=	20	0.9571428571428572
+k=	21	0.9571428571428572
+k=	22	0.9571428571428572
+k=	23	0.9571428571428572
+k=	24	0.9571428571428572
+k=	25	0.9571428571428572
+
+k=	26	0.9571428571428572
+
+k=	27	0.9571428571428572
+k=	28	0.9571428571428572
+k=	29	0.9571428571428572
+k=	30	0.9571428571428572
+k=	31	0.9571428571428572
+k=	49	0.9571428571428572
+
+```
+
+ 
+
+#### 2.4 Construa o gráfico com erro de validação cruzada
+
 Usando o script abaixo, selecionei `15` valores de `k` entre `1` e `489`.
 
 A amostra vai até `699`. Entretanto, tive que limitar para um valor inferior, caso contrário, na etapa seguinte, quando eu fosse rodar a acurácia do modelo preditivo para cada um desses valores, eu poderia ter `k` maior do que o `n`. Portanto, limitei os valores possíveis de `k` entre `1` e `489`, sendo que `489`  é `70%` de `699`, arredondando para baixo.
@@ -410,16 +580,14 @@ lista_valores_hiperparametros = random.sample(range(1,489),15)
 print (lista_valores_hiperparametros)
 lista_valores_hiperparametros.append(26)
 
-ista_valores_hiperparametros.sort()
+lista_valores_hiperparametros.sort()
 print (lista_valores_hiperparametros)
 
 ```
 
-#### 2.4 Construa o gráfico com erro de validação cruzada
 
 
-
-Ao invés de usar o erro, eu usei o ''complementar'', o nível de acurácia. 
+Ao invés de construir um gráfico usando o erro, eu usei o ''complementar'', o nível de acurácia. 
 
 Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado,  quanto maior o valor do hiperparâmetro, menor é a acurácia do modelo preditivo, isto é, mais expressivo é o erro.
 
