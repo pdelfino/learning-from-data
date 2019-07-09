@@ -725,18 +725,15 @@ Como visto acima, o valor do hiperparâmetro é peça chave para o nível de acu
 
 
 
-## Especulações e trabalhos futuros possíveis
+# Extra
 
 
 
-Se eu tivesse mais tempo, gostaria de comparar esse modelo preditivo com um modelo ainda mais simples, que usasse a correlação entre o tamanho do tumor e a sua classificação como maligno/benigno.
+No momento da entrega da A2, coloquei como *future work* a elaboração de outros modelos preditivos para o mesmo problema. A ideia era ver como a acurácia se comportaria diante de um modelo mais simples e de um modelo mais sofisticado. Como sugerido nas aulas do Professor Eduardo Mendes, ao avaliar a qualidade de um modelo preditivo sempre devemos ter um *lower bound* de referência.
 
-O nível de acurácia da predição com knn sendo k=26 foi alto, aproximadamente, 95%. Minha hipótese  é que um modelo que explorasse a correlação citada acima teria uma predição com acurácia inferior, mas, ainda sim, alta, como na faixa de 80-90%.
+Como modelo mais sofisticado que o KNN, será usado o *Support Vector Machine (SVM)*.
 
-O professor Eduardo Mendes disse em sala que a avaliação de modelos preditivos deve ter sempre uma comparação, uma espécie de `lower bound`, em que o modelador compara o desempenho de um modelo simples com um modelo mais sofisticado. 
 
-Além disso, seria possível resolver este problema de classificação com um modelo preditivo de classificação via *Support Vector Machine*.
 
-Acredito que esse seria um trabalho futuro interessante, comparar o KNN com um modelo mais simples, baseado na correlação com um variável, e com um modelo mais sofisticado como SVM. Infelizmente, em virtude da restrição de tempo, deixarei a ideia dessa comparação como trabalho futuro.
-
+## Support Vector Machine
 
