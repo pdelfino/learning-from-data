@@ -41,7 +41,7 @@ Os principais aspectos da base são:
 
 
 
--  A amostra é formada por 699 elementos, em 241 casos o tumor era *benigno* e em 458 casos o tumor era *maligno*.
+-  A amostra é formada por `699` elementos, em `241` casos o tumor era *benigno* e em `458` casos o tumor era *maligno*.
 
 - Ao todo são 11 colunas/atributos na base de dados, sendo que uma delas é apenas um identificador (ID) e a última delas apresenta a classificação como Benigno ou Maligno. Para tumores benignos, o número 2 é usado. Para tumores malignos, o número 4 é usado.
 
@@ -274,8 +274,8 @@ Entre os valores máximos em cada uma das variáveis é possível encontrar algu
 
 - A documentação da base de dados está disponibillizada no arquivo`breast-cancer-wisconsin.names`. No documento, indica-se a seguinte distribuição de tumores benignos e malignos na amostra :
 
-  ​	Benign: 458 (65.5%)
-  ​	Malignant: 241 (34.5%)
+  ​	Benign: `458 `(`65.5%`)
+  ​	Malignant: `241` (`34.5%`)
 
 Assim, decidi plotar os dados por meio do script:
 
@@ -349,7 +349,7 @@ plt.show()
 
 #### 1.5 Proporção de treino e de teste
 
-Dividi os meus dados aleatoriamente na proporção de 70-30, sendo que 70% foram usados para treinamento e 30% para teste.
+Dividi os meus dados aleatoriamente na proporção de `70-30`, sendo que `70%` foram usados para treinamento e `30%` para teste.
 
 
 
@@ -390,7 +390,7 @@ O método usado será o KNN. Desse modo, existe um único hiperparâmetro a ser 
 
 Seguindo as recomendações de boas práticas que percebi no conteúdo prático citado acima, a recomendação é de usar a raiz quadrada do tamanho da amostra, isto é: 
 
-$$ k = \sqrt{n} $$
+k = \sqrt{n} 
 
 No caso,  a amostra é `n = 699`. Assim, a raiz aproximada é `k = 26`.
 
