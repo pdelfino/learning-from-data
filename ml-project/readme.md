@@ -14,7 +14,7 @@ Antes de iniciar a resolução, cabe indicar os materiais de consulta. Durante a
 
 - Repositório do professor Renato Souza da EMAp, em especial, o *case* da IRIS [link](https://github.com/rsouza/FGV_Intro_DS)
 - Vídeo IRIS [link](https://www.youtube.com/watch?v=hd1W4CyPX58)
-- Playlist do Youtuber sentdex com vários exemplos, modelo preditivo de ações e, inclusive, o de câncer de mama que será discutido aqui [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
+- *Playlist* do Youtuber sentdex com vários exemplos, modelo preditivo de ações e, inclusive, o de câncer de mama que será discutido aqui [link](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)
 - Stackoverflow: perguntas diversas feitas por outros usuários e uma pergunta que eu mesmo fiz [link](https://stackoverflow.com/questions/56718635/is-the-interpretation-of-the-data-visualization-bellow-which-uses-python-librar)
 
 
@@ -45,7 +45,7 @@ Os principais aspectos da base são:
 
 - Ao todo são 11 colunas/atributos na base de dados, sendo que uma delas é apenas um identificador (ID) e a última delas apresenta a classificação como Benigno ou Maligno. Para tumores benignos, o número 2 é usado. Para tumores malignos, o número 4 é usado.
 
-  De acordo com a documentação, essas são as variáveis:
+  De acordo com a documentação da base de dados, essas são as variáveis:
 
   ```tex
   
@@ -240,15 +240,15 @@ Apesar de simples, a imagem acima ilustra a informação crucial dos dados.
 
 
 
-Duas visualizações mais interessantes e menos óbvias  serão mostradas abaixo.  Entretando, cabe contar brevemente a história por trás delas.
+Duas visualizações mais interessantes e menos óbvias  serão mostradas abaixo.  Entretando, cabe contar brevemente a origem por trás delas.
 
 
 
-Meu pai é médico, tendo feito residência em cirurgia geral. Com o feriado de Corpus Christi, vim para BH, e, um dia, comentei do trabalho que estava fazendo, que envolvia tumores de mama.  Ao saber da proposta de "advinhar o futuro" (modelo de predição) do trabalho, meu pai me disse que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
+Entre as sugestões da comunidade para trabalhos  prático de *data science* e de *machine learning* é que o processo seja discutido com um especialista do domínio, um profissional que entende o **contexto** da onde os dados foram retirados. Idealmente, o próprio desenvolvedor de machine learning é conhecedor do domínio em jogo. No meu caso, tenho conhecimentos apenas de ensino médio e fundamental sobre biologia. Assim, busquei conversar com um médico, que apesar de  cirurgião (e não oncologista),  deu uma contribuição. Ao saber da proposta de "advinhar o futuro" (modelo de predição) do trabalho, o profissional de saúde indicou que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
 
 
 
-Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula . De fato, a hipótese/intuição do meu pai, que tem alguma familiaridade com o domínio do trabalho, estava certa. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
+Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula. De fato, a hipótese/intuição da figura que tive como especialista no domínio estava certa. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
 
 ![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/histogram-cell-size.png)
 
@@ -286,7 +286,7 @@ Dividi os meus dados aleatoriamente na proporção de 70-30, sendo que 70% foram
 
 #### 2.1 Indicação das variáveis dependentes e independentes que serão usadas
 
-Como dito acima, as variáveis dependentes são:
+Como dito acima, as variáveis independentes são:
 
 - `Clump Thickness   `
 - `Uniformity of Cell Size  `
@@ -299,7 +299,7 @@ Como dito acima, as variáveis dependentes são:
 - `Normal Nucleoli  `
 - `Mitoses` 
 
-A única variável independente será:
+A única variável dependente será:
 
 - `Class`        
 
@@ -348,7 +348,7 @@ print (lista_valores_hiperparametros)
 
 Ao invés de usar o erro, eu usei o ''complementar'', o nível de acurácia. 
 
-Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado, ficando maior, menor é a acurácia do modelo preditivo, isto é, maior é o erro.
+Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado,  quanto maior o valor do hiperparâmetro, menor é a acurácia do modelo preditivo, isto é, mais expressivo é o erro.
 
 Portanto, a intuição do uso da raiz quadrada na regra de bolso é: ela serve para "achatar" o valor do hiperparâmetro em função do tamanho da amostra.
 
@@ -494,15 +494,8 @@ O nível de acurácia da predição com knn sendo k=26 foi alto, aproximadamente
 
 O professor Eduardo Mendes disse em sala que a avaliação de modelos preditivos deve ter sempre uma comparação, uma espécie de `lower bound`, em que o modelador compara o desempenho de um modelo simples com um modelo mais sofisticado. 
 
-Além disso, como um modelo mais sofisticado que KNN, seria possível resolver este problema de classificação com um modelo preditivo de classificação via *Support Vector Machine.*
+Além disso, seria possível resolver este problema de classificação com um modelo preditivo de classificação via *Support Vector Machine*.
 
-Acredito que esse seria um trabalho futuro legal, comparar o KNN com um modelo mais simples, baseado na correlação com um variável, e com um modelo mais sofisticado como SVM. Infelizmente, em virtude da restrição de tempo, deixarei a ideia dessa comparação como trabalho futuro.
-
-
-
-
-
-
-
+Acredito que esse seria um trabalho futuro interessante, comparar o KNN com um modelo mais simples, baseado na correlação com um variável, e com um modelo mais sofisticado como SVM. Infelizmente, em virtude da restrição de tempo, deixarei a ideia dessa comparação como trabalho futuro.
 
 
