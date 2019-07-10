@@ -260,22 +260,22 @@ class
 
  
 
-Analisando a tabela acima, é possível perceber que nos valores máximos e mínimos os tumores malignos e benignos não são muito diferentes. No caso de mínimo, são praticamente idênticos, seja no tamanho uniforme da célular ou em sua forma, tanto tumores benignos como malignos recebem nota 1 na escala de 1 a 10 montada pelos pesquisadores.
+Analisando a tabela acima, é possível perceber que nos valores máximos e mínimos os tumores malignos e benignos não são muito diferentes. No caso de mínimo, são praticamente idênticos, seja no tamanho uniforme da célular ou na mitose celular, tanto tumores benignos como malignos recebem nota 1 como valor **mínimo** na escala de 1 a 10, sendo **idênticos**.
 
-Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, o máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo de *Bland Chromatin* em tumores malignos recebe nota 10. Apesar desta diferença, os valores máximos entre os dois tumores nas dez variáveis consideradas são, de certa forma, homogêneos.
+Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, o máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo na mesma váriavel (*Bland Chromatin*) em tumores malignos recebe nota 10. Apesar desta diferença, os valores **máximos** entre os dois tumores nas dez variáveis consideradas são, de certa forma, **homogêneos**, sendo a maior diferença identificada de três unidades.
 
+**A diferença chave entre os dois tipos de tumores, não estão nos valores máximos ou mínimos de cada variável, mas sim nos valores que estão no quartil superior, isto é, no 75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, a nota atribuída para o quartil superior é de 1 em 10 para tumores beginos. Em tumores malignos, por sua vez, neste percentil 75º a nota atribuída é de 10. Como a escala usada pelos pesquisadores que montaram a base de dados vai de 1 a 10, essa é maior diferença possível: nove unidades.
 
-
-**A diferença chave entre os dois tipos de tumores, não no máximo ou mínimo, mas sim nos valores que estão no quartil superior, isto é,  75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, em tumores benignos a nota atribuída para o quartil superior é de 1 em 10, no mesmo percentil, tumores malignos receberam nota 10 de 10. Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu. Isso sugere que casos nessa faixa de percentil sejam mais fáceis de serem classificados  do que casos em que as métricas estão próximas do máximo definido.
+Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu. Isso sugere que casos nessa faixa de percentil sejam mais fáceis de serem classificados  do que casos que estão no percentil 1º ou 100º.
 
 #### 1.4 Apresente outra duas análises ou visualizações interessantes
 
 
 
-- A documentação da base de dados está disponibillizada no arquivo`breast-cancer-wisconsin.names`. No documento, indica-se a seguinte distribuição de tumores benignos e malignos na amostra :
+A documentação da base de dados está disponibillizada no arquivo`breast-cancer-wisconsin.names`. No documento, indica-se a seguinte distribuição de tumores benignos e malignos na amostra :
 
-  ​	Benign: `458 `(`65.5%`)
-  ​	Malignant: `241` (`34.5%`)
+* Benign: `458 ` (`65.5%`)
+* Malignant: `241` (`34.5%`)
 
 Assim, decidi plotar os dados por meio do script:
 
@@ -311,17 +311,13 @@ O código retorna a seguinte imagem:
 
 Apesar de simples, a imagem acima ilustra a informação crucial dos dados.
 
-
-
 Duas visualizações mais interessantes e menos óbvias  serão mostradas abaixo.  Entretando, cabe contar brevemente a origem por trás delas.
 
+Uma das sugestões da comunidade para trabalhos práticos de *data science* e de *machine learning* é o envolvimento de um especialista do domínio no processo, isto é, recomenda-se que o projeto seja discutido com um profissional que entende o **contexto** de onde os dados foram retirados. Idealmente, o próprio desenvolvedor de machine learning é conhecedor do domínio envolvido. 
 
+No meu caso, tenho conhecimentos apenas de ensino médio sobre biologia. Assim, busquei conversar com um médico, que apesar de  cirurgião (e não oncologista),  deu uma contribuição. Ao saber da proposta de "advinhar o futuro" (modelo de predição) do trabalho, o profissional de saúde indicou que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
 
-Entre as sugestões da comunidade para trabalhos  prático de *data science* e de *machine learning* é que o processo seja discutido com um especialista do domínio, um profissional que entende o **contexto** da onde os dados foram retirados. Idealmente, o próprio desenvolvedor de machine learning é conhecedor do domínio em jogo. No meu caso, tenho conhecimentos apenas de ensino médio e fundamental sobre biologia. Assim, busquei conversar com um médico, que apesar de  cirurgião (e não oncologista),  deu uma contribuição. Ao saber da proposta de "advinhar o futuro" (modelo de predição) do trabalho, o profissional de saúde indicou que o tamanho do tumor seria provavelmente um bom indicativo para descobrir se ele é maligno ou benigno. 
-
-
-
-Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula. De fato, a hipótese/intuição da figura que tive como especialista no domínio estava certa. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
+Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação ao tamanho dos tumores e uma separação por cores. Para isso, usei a variável  `Uniformity of Cell Size`.  Essa variável vai de 1 a 10, sendo 10 o tamanho máximo de uma célula. De fato, a hipótese/intuição  do ''especialista'' no domínio estava correta. Como o histograma abaixo indica,  tumores malignos tendem a ser maiores que benignos:
 
 ![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/histogram-cell-size.png)
 
@@ -385,8 +381,6 @@ Como dito anteriormente, a variável `Sample code number` serve apenas como ferr
 
 
 O método usado será o KNN. Desse modo, existe um único hiperparâmetro a ser definido: o k-número de vizinhos que serão  considerados.
-
-
 
 Seguindo as recomendações de boas práticas que percebi no conteúdo prático citado acima, a recomendação é de usar a raiz quadrada do tamanho da amostra, isto é: 
 
@@ -589,7 +583,7 @@ print (lista_valores_hiperparametros)
 
 Ao invés de construir um gráfico usando o erro, eu usei o ''complementar'', o nível de acurácia. 
 
-Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado,  quanto maior o valor do hiperparâmetro, menor é a acurácia do modelo preditivo, isto é, mais expressivo é o erro.
+Além disso, fiz questão de inserir o valor k=26, sugerido pela ''regra de bolso''. É possível constatar que conforme o valor do hiperparâmetro se distancia do recomendado, pior é a acurácia do modelo. Assim, quanto maior o valor do hiperparâmetro, mais expressivo é o erro.
 
 Portanto, a intuição do uso da raiz quadrada na regra de bolso é: ela serve para "achatar" o valor do hiperparâmetro em função do tamanho da amostra.
 
@@ -652,9 +646,15 @@ plt.show()
 
 #### 2.5 Plote a fronteira de decisão para o hiperparâmetro escolhido
 
-Não é simples plotar a fronteira de decisão tendo em  vista que são 10 variáveis em jogo. Nos exemplos vistos em sala, tínhamos duas variáveis e um plano de duas dimensões. Diante desse impasse, conversei com a colega Vitória sobre isso.
+Não é simples plotar a fronteira de decisão tendo em  vista que são 10 variáveis envolvidas. Nos exemplos vistos em sala, tínhamos duas variáveis e um plano de duas dimensões. 
 
-De acordo com ela, existem técnicas para plotar a fronteira de decisão em casos de dimensões superiores, mas, em virtude da restrição de tempo, não foi possível explorar essas técnicas para este trabalho.
+Diante desse impasse, resolvi fazer uma simplificação. Vou plotar a fronteira de decisão utilizando 2 variáveis independentes em cada eixo e a variável dependete (que indica a classe  do tumor como benigno ou maligno), será usada para indicar a cor.
+
+Obviamente, a fronteira de decisão plotada abaixo não reflete a acurácia do modelo que de fato foi usado em outras questões.
+
+[código]
+
+[imagem]
 
 
 
@@ -731,9 +731,13 @@ Como visto acima, o valor do hiperparâmetro é peça chave para o nível de acu
 
 No momento da entrega da A2, coloquei como *future work* a elaboração de outros modelos preditivos para o mesmo problema. A ideia era ver como a acurácia se comportaria diante de um modelo mais simples e de um modelo mais sofisticado. Como sugerido nas aulas do Professor Eduardo Mendes, ao avaliar a qualidade de um modelo preditivo sempre devemos ter um *lower bound* de referência.
 
-Como modelo mais sofisticado que o KNN, será usado o *Support Vector Machine (SVM)*.
+Como modelo mais sofisticado que o KNN, será usado o *Support Vector Machine (SVM)*. Como modelo mais simples que o KNN, será usada uma regressão lógistica simples.
 
 
 
 ## Support Vector Machine
+
+
+
+## Regressão Logística 
 
