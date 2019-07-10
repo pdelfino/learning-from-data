@@ -2,13 +2,13 @@ import numpy as np
 from sklearn import preprocessing, cross_validation, neighbors
 import pandas as pd
 
-# no arquivo de dados são 11 variáveis, 10 independetes e 1 dependente
+# no arquivo de dados são 11 variáveis, 9 independetes, 1 dependente e 1 primary key
 df = pd.read_csv('breast-cancer-wisconsin.data.txt')
 
 # para dados faltantes
 df.replace('?',-99999, inplace=True)
 
-# tira a coluna de id pq ela não é nem variável dependente e nem independente
+# tira a coluna de id pq ela não é nem variável dependente e nem independente, só primary key
 df.drop(['id'], 1, inplace=True)
 
 # as features são tudo menos a coluna de classe, a id já foi excluída
@@ -29,10 +29,12 @@ clf.fit(X_train, y_train)
 # fazer o teste para saber a acurácia
 accuracy = clf.score(X_test, y_test)
 
-print("acurácia: ", accuracy)
-print("erro no teste: ", 1-accuracy)
-print ("erro no treinamento: ", 1-clf.score(X_train,y_train))
+print("accuracy: ", accuracy)
+print("test error: ", 1-accuracy)
+print ("trainning error: ", 1-clf.score(X_train,y_train))
 
+scores = cross_validation.cross_val_score(clf,X,cv=5)
+print ("cross-validation error", scores)
 
 '''
 #exemplo pra prever se a célula é benigna ou maligna
