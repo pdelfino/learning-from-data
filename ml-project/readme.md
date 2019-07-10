@@ -654,7 +654,13 @@ Obviamente, a fronteira de decisão plotada abaixo não reflete a acurácia do m
 
 [código]
 
-[imagem]
+
+
+A imagem é:
+
+
+
+![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/fronteira-decisao.png)
 
 
 
