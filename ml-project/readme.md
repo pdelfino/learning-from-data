@@ -298,7 +298,12 @@ plt.title('Maligno versus Benigno')
 plt.ylabel('Frequência')
 plt.figtext(.75, .01, "4 = Tumor Maligno")
 plt.figtext(.15, .01, "2 = Benigno")
+x = [2,4]
+plt.xticks(x)
+y = [0,50,100,150,200,250,300,350,400,450,500,550,600]
+plt.yticks(y)
 plt.show()
+
 ```
 
 
@@ -327,7 +332,7 @@ Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação
 
 
 
-O código usado para essas visualizações é:
+O código usado para a primeira visualizações é:
 
 ```python
 import pandas as pd
@@ -336,7 +341,33 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('breast-cancer-wisconsin.data.txt')
 print(df.head())  
 #df['unif_cel_size'].hist()
-df.groupby('class')['unif_cel_size'].plot(kind='hist',legend=True)
+df.groupby('class')['unif_cel_size'].plot(kind='hist', color="black")
+
+plt.xlabel("Uniform Cell Size (0-10)", fontdict=None, labelpad=None, )
+plt.ylabel("Frequência do número de casos", fontdict=None, labelpad=None, )
+x = [1,2,3,4,5,6,7,8,9,10]
+plt.xticks(x)
+plt.show()
+
+```
+
+E para a segunda:
+
+
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+print(df.head())  
+#df['unif_cel_size'].hist()
+df.groupby('class')['unif_cel_size'].plot(kind='hist')
+
+plt.xlabel("Uniform Cell Size (0-10)", fontdict=None, labelpad=None, )
+plt.ylabel("Frequência do número de casos", fontdict=None, labelpad=None, )
+
+plt.gca().legend(("2-benigno","4-maligno"))
 plt.show()
 
 ```
@@ -652,7 +683,52 @@ Diante desse impasse, resolvi fazer uma simplificação. Vou plotar a fronteira 
 
 Obviamente, a fronteira de decisão plotada abaixo não reflete a acurácia do modelo que de fato foi usado em outras questões.
 
-[código]
+```python
+import numpy as np
+from math import sqrt
+import matplotlib.pyplot as plt
+import warnings
+from matplotlib import style
+from collections import Counter
+from sklearn import preprocessing, cross_validation, neighbors
+import pandas as pd
+
+style.use('fivethirtyeight')
+
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+
+df.replace('?',-99999, inplace=True)
+
+unif_cel_size = df['unif_cel_size']
+#print (unif_cel_size)
+
+marg_adhesion = df['marg_adhesion']
+#print (marg_adhesion)
+
+classif = df['class']
+#print (classif)
+
+vals = []
+
+for i in range(0,len(classif)):
+    vals.append([unif_cel_size[i],marg_adhesion[i],classif[i]])
+
+# criar dicionário
+# iterar sobre vals, se terminar em 2, adicionar à parte com 2, se terminar em 4, adicionar à parte maligno
+
+for i in vals:
+    if i[2]==2:
+
+        plt.scatter(i[0],i[1],s=50,color='b')
+    elif i[2]==4:
+        plt.scatter(i[0],i[1],s=50,color='r')
+plt.xlabel('uniform cell')
+plt.ylabel('marginal adhesion')
+plt.title('Fronteira de decisão para 2 variáveis')
+plt.show()
+```
+
+
 
 
 
@@ -905,3 +981,8 @@ trainning error:  0.024539877300613466
 ### Conclusão
 
 Conforme o que foi visto, a sofisticação de métodos implicou uma melhora dos resultados, sendo que a maior acurácia foi atribuída à *Support Vector Machine*.
+
+
+
+
+
