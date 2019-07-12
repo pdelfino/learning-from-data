@@ -260,11 +260,11 @@ class
 
  
 
-Analisando a tabela acima, é possível perceber que nos valores máximos e mínimos os tumores malignos e benignos não são muito diferentes. No caso de mínimo, são praticamente idênticos, seja no tamanho uniforme da célular ou na mitose celular, tanto tumores benignos como malignos recebem nota 1 como valor **mínimo** na escala de 1 a 10, sendo **idênticos**.
+Analisando a tabela acima, é possível perceber que, nos valores máximos e nos valores mínimos, os tumores malignos e benignos não são muito diferentes. No caso de valores mínimos, são praticamente idênticos, seja no tamanho uniforme da célular ou na mitose celular, tanto tumores benignos como malignos recebem nota 1 como valor **mínimo** na escala de 1 a 10.
 
 Entre os valores máximos em cada uma das variáveis é possível encontrar algumas diferenças entre tumores malignos e beginos. Por exemplo, o máximo *Bland Chromatin* em tumores benignos recebete nota 7, enquanto que o máximo na mesma váriavel (*Bland Chromatin*) em tumores malignos recebe nota 10. Apesar desta diferença, os valores **máximos** entre os dois tumores nas dez variáveis consideradas são, de certa forma, **homogêneos**, sendo a maior diferença identificada de três unidades.
 
-**A diferença chave entre os dois tipos de tumores, não estão nos valores máximos ou mínimos de cada variável, mas sim nos valores que estão no quartil superior, isto é, no 75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, a nota atribuída para o quartil superior é de 1 em 10 para tumores beginos. Em tumores malignos, por sua vez, neste percentil 75º a nota atribuída é de 10. Como a escala usada pelos pesquisadores que montaram a base de dados vai de 1 a 10, essa é maior diferença possível: nove unidades.
+**A diferença chave entre os dois tipos de tumores não está nos valores máximos ou mínimos de cada variável, mas sim nos valores que estão no quartil superior, isto é, no 75º percentil.** Nessa faixa dos dados, as estatísticas são bem heterogêneas entre tumores benignos e malignos. Por exemplo, na variável *Uniform Cell Size*, a nota atribuída para o quartil superior é de 1 em 10 para tumores beginos. Em tumores malignos, por sua vez, neste percentil 75º a nota atribuída é de 10. Como a escala usada pelos pesquisadores que montaram a base de dados vai de 1 a 10, essa é maior diferença possível: nove unidades.
 
 Em outras variáveis como  *Marg adhesion* e *Norm Nucleoli* essa assimetria também aconteceu. Isso sugere que casos nessa faixa de percentil sejam mais fáceis de serem classificados  do que casos que estão no percentil 1º ou 100º.
 
@@ -332,7 +332,7 @@ Com esse comentário, decidi validar a hipótese. Fiz um histograma em relação
 
 
 
-O código usado para a primeira visualizações é:
+O código usado para a primeira visualização é:
 
 ```python
 import pandas as pd
@@ -421,7 +421,7 @@ No caso,  a amostra é `n = 699`. Assim, a raiz aproximada é `k = 26`.
 
 
 
-#### 2.3 Utilize k-fold cross validation para selecionar 15 valores do hiperparâmetro
+#### 2.3 Utilize k-fold cross validation para selecionar pelo menos 15 valores do hiperparâmetro
 
 O objetivo do *cross validation* é escolher um `k` ótimo.  Assim, irei testar o modelo de predição para todos os valores de `k` entre `1` e `50`.
 
@@ -679,7 +679,7 @@ plt.show()
 
 Não é simples plotar a fronteira de decisão tendo em  vista que são 10 variáveis envolvidas. Nos exemplos vistos em sala, tínhamos duas variáveis e um plano de duas dimensões. 
 
-Diante desse impasse, resolvi fazer uma simplificação. Vou plotar a fronteira de decisão utilizando 2 variáveis independentes em cada eixo e a variável dependete (que indica a classe  do tumor como benigno ou maligno), será usada para indicar a cor.
+Diante desse impasse, resolvi fazer uma simplificação. Vou plotar a fronteira de decisão utilizando 2 variáveis independentes em cada eixo e a variável dependete (que indica a classe  do tumor como benigno ou maligno), será usada para indicar a cor. As duas variáveis independentes utilizadas foram: *uniformity cell size* (eixo horizontal - x) e *marginal adhesion* (eixo vertical - y).
 
 Obviamente, a fronteira de decisão plotada abaixo não reflete a acurácia do modelo que de fato foi usado em outras questões.
 
@@ -739,6 +739,8 @@ A imagem é:
 ![alt text](https://github.com/pdelfino/learning-from-data/blob/master/ml-project/fronteira-decisao.png)
 
 
+
+Como é possível ver acima, em virtude da mistura dos dados não é possível traçar uma linha que os separe.
 
 #### 2.6 Apresente os erros dentro da amostra, de validação cruzada e de teste
 

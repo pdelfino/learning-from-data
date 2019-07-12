@@ -33,7 +33,7 @@ print("accuracy: ", accuracy)
 print("test error: ", 1-accuracy)
 print ("trainning error: ", 1-clf.score(X_train,y_train))
 
-scores = cross_validation.cross_val_score(clf,X,cv=5)
+scores = cross_validation.cross_val_score(clf,X_train,cv=5)
 print ("cross-validation error", scores)
 
 '''
