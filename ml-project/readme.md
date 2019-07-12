@@ -750,8 +750,6 @@ Erro de teste: `0.042857142857142816`
 
 Erro de treinamento: `0.03271983640081799`
 
-Não consegui fazer erro de validação cruzada (?)
-
 
 
 Código com comentário linha por linha:
