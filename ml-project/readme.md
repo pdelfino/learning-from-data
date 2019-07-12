@@ -833,3 +833,75 @@ Como é possível ver, **a acurácia do modelo SVM foi levemente superior a do m
 
 
 
+O modelo de regressão logística está sendo usado aqui como alternativa mais simples ao KNN.
+
+Novamente, o código, os dados, as variáveis dependetes e independentes são as idênticas ao que foi usado para aplicação dos métodos de KNN e de SVM. Assim como na adaptação para aplicação do método SVM, houve a alteração de apenas uma linha:
+
+
+
+```python
+clf = linear_model.LogisticRegression()
+```
+
+Para gerar o mínimo de interferência possível, foram mantidos todos os parâmetros por *default*. O código completo é:
+
+
+
+```python
+import numpy as np
+from sklearn import preprocessing, cross_validation, neighbors, svm, linear_model
+import pandas as pd
+
+# no arquivo de dados são 11 variáveis, 9 independetes, 1 dependente e 1 primary key
+df = pd.read_csv('breast-cancer-wisconsin.data.txt')
+
+# para dados faltantes
+df.replace('?',-99999, inplace=True)
+
+# tira a coluna de id pq ela não é nem variável dependente e nem independente, só primary key
+df.drop(['id'], 1, inplace=True)
+
+# as features são tudo menos a coluna de classe, a id já foi excluída
+X = np.array(df.drop(['class'], 1))
+
+# o Y na minha supervised learning é a class
+y = np.array(df['class'])
+
+# separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
+
+############################################################## 
+clf = linear_model.LogisticRegression()
+
+# inserir no objeto o treinamento
+clf.fit(X_train, y_train)
+
+# fazer o teste para saber a acurácia
+accuracy = clf.score(X_test, y_test)
+
+print("accuracy: ", accuracy)
+print("test error: ", 1-accuracy)
+print ("trainning error: ", 1-clf.score(X_train,y_train))
+
+```
+
+
+
+
+
+ Assim, o output foi:
+
+
+
+```
+accuracy:  0.9380952380952381
+test error:  0.06190476190476191
+trainning error:  0.024539877300613466
+
+```
+
+
+
+### Conclusão
+
+Conforme o que foi visto, a sofisticação de métodos implicou uma melhora dos resultados, sendo que a maior acurácia foi atribuída à *Support Vector Machine*.
