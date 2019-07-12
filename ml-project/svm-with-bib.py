@@ -20,8 +20,8 @@ y = np.array(df['class'])
 # separar nos conjuntos de treino e de teste, para depois descobrir a acurácia
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3)
 
-# defini o hiperparâmetro como k=26 já que n=699 como tamanho da amostra
-clf = svm.SVC()
+# poderia ser 'linear', 'poly', 'sigmoid'. Pelo que vimos em sala, usar 'rbf' 
+clf = svm.SVC(kernel='rbf')
 
 # inserir no objeto o treinamento
 clf.fit(X_train, y_train)
