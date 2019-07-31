@@ -1,0 +1,27 @@
+Olá professor,
+
+Como falamos na sua sala, melhorei o trabalho que eu já havia entregue na A2 e implementei o future work que havia descrito no trabalho.
+
+Procurei o Hugo para ter um feedback detalhado e apliquei praticamente todas as sugestões dele.
+
+Entre as atividades que fiz:
+
+ - melhorei as vizualizações, ficaram mais bonitas e informativas;
+ - deixei o texto mais profissional;
+ - implementei um modelo mais sofisticado (SVM) e um mais simples (regressão logística) para o mesmo problema - de modo a ter ter uma referência;
+ - fiz uma fronteira de decisão, que não tinha feito na A2, mas precisei simplificar pra usar 3 variáveis, e não as 10 envolvidas;
+ - identifiquei um ponto interessante nas estatísticas descritivas, uma assimetria entre tumores benignos e malignos no percentil 75; e, 
+ - Tentei fazer mais comentários inteligentes dentro do contexto destes dados.
+ 
+
+Como pretendo usar o github como uma espécie de portfólio, acho que o MarkDown, ao invés do formato nativo de Jupyter Notebook, funciona melhor.
+
+A pessoa consegue ver num formato agradável esteticamente texto e código mas não precisa fazer nenhum download. Além disso, não ter nenhum programa específico.
+Basta ler o "readme" que escrevi no navegador para ter a experiência de leitura boa. 
+
+Foi legal fazer o trabalho. Acaba sendo um "produto" para mostrar.
+
+Novamente, fiquei trabalhando com controle de versionamento no meu repositório paralelo, para evitar problemas na hora de fazer o PR.
+
+Obrigado e um abraço,
+Pedro   
