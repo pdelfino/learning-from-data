@@ -9,11 +9,15 @@ Machine Learning
 
  + Tech Stack: Python 3.
 
- + Projects: 
-   - PLA; 
+ + Exercises: 
+   - knn implementation;
+   - rbf implementation;
+   - MLP implementation;
    
  + Support Material: Learning From Data, Abu-Mostafa
-
+ 
+ + Practical project: 
+   - A prediction model to classify a tumour as malignant or benign.
 
 # Trabalho de ML
 
