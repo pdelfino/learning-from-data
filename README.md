@@ -1,6 +1,6 @@
 # Learning From Data -- Machine Learning Implementations
 
-![The Anatomy Lesson of Dr. Nicolaes Tulp](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg/960px-Rembrandt_-_The_Anatomy_Lesson_of_Dr_Nicolaes_Tulp.jpg)
+![The Anatomy Lesson of Dr. Nicolaes Tulp](./painting.jpg)
 
 *"The Anatomy Lesson of Dr. Nicolaes Tulp" (1632) by Rembrandt — [Wikipedia](https://en.wikipedia.org/wiki/The_Anatomy_Lesson_of_Dr._Nicolaes_Tulp)*
 
